@@ -1,0 +1,40 @@
+--------------------------------------
+Fuzzing method getYAMLFiles()
+--------------------------------------
+expected str, bytes or os.PathLike object, not int
+[]
+expected str, bytes or os.PathLike object, not list
+
+
+--------------------------------------
+Fuzzing method constructHelmString()
+--------------------------------------
+can only concatenate str (not "int") to str
+cannot unpack non-iterable NoneType object
+too many values to unpack (expected 3)
+
+
+--------------------------------------
+Fuzzing method getHelmTemplateContent()
+--------------------------------------
+{}
+expected str, bytes or os.PathLike object, not NoneType
+expected str, bytes or os.PathLike object, not tuple
+
+
+--------------------------------------
+Fuzzing method getMatchingTemplates()
+--------------------------------------
+expected str, bytes or os.PathLike object, not int
+not enough values to unpack (expected 3, got 1)
+expected str, bytes or os.PathLike object, not NoneType
+
+
+--------------------------------------
+Fuzzing method getValidTaints()
+--------------------------------------
+not enough values to unpack (expected 2, got 1)
+too many values to unpack (expected 2)
+'NoneType' object is not iterable
+
+Fuzzing Complete
