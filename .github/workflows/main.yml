@@ -1,0 +1,14 @@
+name: Run fuzz.py 
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run fuzz.py 
+      run: python fuzz.py
