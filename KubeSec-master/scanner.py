@@ -9,8 +9,10 @@ import graphtaint
 import os 
 import pandas as pd 
 import numpy as np 
+import logger
 
-def getYAMLFiles(path_to_dir):
+def getYAMLFiles(path_to_dir):  
+    logNum0 = logger.giveMeLoggingObject()
     valid_  = [] 
     for root_, dirs, files_ in os.walk( path_to_dir ):
        for file_ in files_:
@@ -18,53 +20,121 @@ def getYAMLFiles(path_to_dir):
            if(os.path.exists(full_p_file)):
              if (full_p_file.endswith( constants.YML_EXTENSION  )  or full_p_file.endswith( constants.YAML_EXTENSION  )  ):
                valid_.append(full_p_file)
+               
+
+    logNum0.debug('{}*{}'.format('Project', 'getYAMLFiles logging, Files successfully obtained')) 
+    logNum0.info('getYAMLFiles logging, Files successfully obtained') 
     return valid_ 
 
 def isValidUserName(uName): 
+    logNum1 = logger.giveMeLoggingObject()
+    
     valid = True
     if (isinstance( uName , str)  ): 
         if( any(z_ in uName for z_ in constants.FORBIDDEN_USER_NAMES )   ): 
+        
+
+            logNum1.debug('{}*{}'.format('Project', 'isValidUserName logging, User name is not valid')) 
+            logNum1.info('isValidUserName logging, User name is not valid') 
+
             valid = False   
         else: 
+        
+            logNum1.debug('{}*{}'.format('Project', 'isValidUserName logging, User name is valid')) 
+            logNum1.info('isValidUserName logging, User name is valid') 
+        
             valid = True    
     else: 
+        logNum1.debug('{}*{}'.format('Project', 'isValidUserName logging, User name is not valid')) 
+        logNum1.info('isValidUserName logging, User name is not valid') 
         valid = False   
+        
+    
     return valid
 
 def isValidPasswordName(pName): 
+    logNum3 = logger.giveMeLoggingObject()
+    
     valid = True
     if (isinstance( pName , str)  ): 
         if( any(z_ in pName for z_ in constants.FORBIDDEN_PASS_NAMES) )  : 
+        
+
+            logNum3.debug('{}*{}'.format('Project', 'isValidPasswordName logging, Password is not valid'))  
+            logNum3.info('isValidPasswordName logging, Password name is not valid') 
+
+            
             valid = False  
         else: 
+
+            logNum3.debug('{}*{}'.format('Project', 'isValidPasswordName logging, Password is valid')) 
+            logNum3.info('isValidPasswordName logging, password name is valid') 
+
+        
             valid = True    
     else: 
-        valid = False               
+        
+        logNum3.debug('{}*{}'.format('Project', 'isValidPasswordName logging, Password is not valid'))  
+        logNum3.info('isValidPasswordName logging, Password name is not valid') 
+        
+        valid = False        
+        
     return valid
 
 def isValidKey(keyName): 
+    logNum5 = logger.giveMeLoggingObject()
     valid = False 
     if ( isinstance( keyName, str )  ):
         if( any(z_ in keyName for z_ in constants.LEGIT_KEY_NAMES ) ) : 
+        
+
+            logNum5.debug('{}*{}'.format('Project', 'isValidKey logging, Key is valid')) 
+            logNum5.info('isValidKey logging, Key is valid') 
+
             valid = True   
         else: 
+
+            logNum5.debug('{}*{}'.format('Project', 'isValidKey logging, Key is not valid')) 
+            logNum5.info('isValidKey logging, Key is not valid') 
+
+            
             valid = False     
     else: 
+        
+        logNum5.debug('{}*{}'.format('Project', 'isValidKey logging, Key is not valid')) 
+        logNum5.info('isValidKey logging, Key is not valid') 
         valid = False                      
     return valid    
 
 def checkIfValidSecret(single_config_val):
+    logNum7 = logger.giveMeLoggingObject()
+    
     flag2Ret = False 
     # print(type( single_config_val ), single_config_val  )
     if ( isinstance( single_config_val, str ) ):
         single_config_val = single_config_val.lower()
         config_val = single_config_val.strip() 
         if ( any(x_ in config_val for x_ in constants.INVALID_SECRET_CONFIG_VALUES ) ):
+            
+
+            logNum7.debug('{}*{}'.format('Project', 'checkIfValidSecret logging, secret is not valid')) 
+            logNum7.info('checkIfValidSecret logging, secret is not valid') 
+
+        
             flag2Ret = False 
         else:
             if(  len(config_val) > 2 )  :
+
+                logNum7.debug('{}*{}'.format('Project', 'checkIfValidSecret logging, secret is valid')) 
+                logNum7.info('checkIfValidSecret logging, secret is valid') 
+
+            
                 flag2Ret = True 
     else: 
+
+        logNum7.debug('{}*{}'.format('Project', 'checkIfValidSecret logging, secret is not valid')) 
+        logNum7.info('checkIfValidSecret logging, secret is not valid') 
+
         flag2Ret = False 
     return flag2Ret
 
@@ -763,4 +833,4 @@ if __name__ == '__main__':
     # cap_sys_module_yaml = 'TEST_ARTIFACTS/cap-module-ostk.yaml'
     # cap_sys_module_dic  = scanForCAPMODULE ( cap_sys_module_yaml )   
 
-    print(cap_sys_module_dic)  
+    print(cap_sys_module_dic)
