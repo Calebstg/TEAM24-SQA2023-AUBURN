@@ -60,3 +60,4 @@ print('--------------------------------------')
 input5 = ["Not a List", ['invalid list', 2], None]
 
 for inp in input5:
+    handle_exception(g.getValidTaints, [inp])
